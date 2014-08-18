@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# coding: utf-8
 if defined?(ActsAsTaggableOn::Tag)
   ActsAsTaggableOn::Tag.class_eval do
     def self.named(name)

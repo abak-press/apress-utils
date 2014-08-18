@@ -1,6 +1,10 @@
 # coding: utf-8
-class Apress::Utils::ProjectOverrideError < StandardError
-  def message
-    'Необходимо переопределить метод в проекте'
+module Apress
+  module Utils
+    class ProjectOverrideError < StandardError
+      def message
+        'Необходимо переопределить метод в проекте'
+      end
+    end
   end
 end

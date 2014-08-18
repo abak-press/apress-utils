@@ -1,17 +1,17 @@
-# -*- encoding : utf-8 -*-
+# coding: utf-8
 
 require File.expand_path('../../../../spec_helper', __FILE__)
 
 describe Apress::Utils::Uri do
 
-  strings1 = [ "http://e1.ru/",
-            "ftp://ftp.e1.ru/",
-            "http://lenta.ru/data.html",
-            "http://lenta.ru/data/data.html",
-            "http://giraf.ru/data/picture.jpg",
-            "ftp://ftp.giraf.ru/datas/pictures/pict1.jpg",
-            "ftp://ftp.giraf.ru/datas/pictures/pict2.jpg",
-            "ftp://ftp.giraf.ru/datas/pictures/pict2(2).jpg",
+  strings1 = ["http://e1.ru/",
+              "ftp://ftp.e1.ru/",
+              "http://lenta.ru/data.html",
+              "http://lenta.ru/data/data.html",
+              "http://giraf.ru/data/picture.jpg",
+              "ftp://ftp.giraf.ru/datas/pictures/pict1.jpg",
+              "ftp://ftp.giraf.ru/datas/pictures/pict2.jpg",
+              "ftp://ftp.giraf.ru/datas/pictures/pict2(2).jpg"
   ]
 
   strings2 = [
@@ -36,16 +36,14 @@ describe Apress::Utils::Uri do
     [ "http://xn--80aqfls.xn--p1ai/dlya-audiovideofoto/akkumulyatory/canon/akkumulyator-%20%D0%B4%D0%BB%D1%8F%20%D0%BA%D0%B5%D0%BD%D0%BE%D0%BD%D0%B0%20-li-ion-canon-lp-e4.html",
       "http://xn--80aqfls.xn--p1ai/dlya-audiovideofoto/akkumulyatory/canon/akkumulyator-%20%D0%B4%D0%BB%D1%8F%20%D0%BA%D0%B5%D0%BD%D0%BE%D0%BD%D0%B0%20-li-ion-canon-lp-e4.html"
     ],
-# это проверка для урл содержащих %C2%B2 он не должен изменять символы %C2%B2
+    # это проверка для урл содержащих %C2%B2 он не должен изменять символы %C2%B2
     [ "http://domsantech.ru/Faucets/Hansgrohe/Faucets_Talis%20S%C2%B2_Hansgrohe/TalisS2_32040000.html",
       "http://domsantech.ru/Faucets/Hansgrohe/Faucets_Talis%20S%C2%B2_Hansgrohe/TalisS2_32040000.html"
     ],
-# это проверка на 2 %C2%B2
+    # это проверка на 2 %C2%B2
     [ "http://domsantech.ru/Faucets/Hansgrohe/Faucets_Talis%20S%C2%B2_Hansgrohe/TalisS%C2%B2_32040000.html",
       "http://domsantech.ru/Faucets/Hansgrohe/Faucets_Talis%20S%C2%B2_Hansgrohe/TalisS%C2%B2_32040000.html"
     ]
-
-
   ]
 
   module CoreUriStubModule
@@ -73,7 +71,5 @@ describe Apress::Utils::Uri do
     strings2.each do |data|
       CoreUriStubModule.encode_punycode(data[0]).should be == data[1]
     end
-
   end
-
 end
