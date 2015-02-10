@@ -121,6 +121,39 @@ module Apress
             r = exec_query("SELECT currval(#{quote(sequence_name)})", 'SQL')
             Integer(r.rows.first.first)
           end
+
+          # Public: Формирует правильный SELECT DISTINCT
+          # PostgreSQL требуется, чтобы колонки, стоящие в ORDER BY была в списке выбираемых,
+          # а также, чтобы колонка DISTINCT была также и в ORDER BY
+          #
+          # Следующий патч исправляет проблемы:
+          # * https://github.com/rails/rails/issues/5868 -
+          # если используем метод order(arel_table[:column].asc) при формировании DISTINCT запроса;
+          # * https://github.com/rails/rails/issues/5152 -
+          # убирает nulls first и nulls last
+          #
+          # Начиная с версии Rails 4.0 данный метод следует убрать
+          #
+          # columns - String
+          # orders - String | Arel::Nodes
+          #
+          # Returns String
+          def distinct(columns, orders)
+            return "DISTINCT #{columns}" if orders.empty?
+
+            # Construct a clean list of column names from the ORDER BY clause, removing
+            # any ASC/DESC modifiers
+            order_columns = orders.map do |s|
+              # Convert Arel node to string
+              s = s.to_sql unless s.is_a?(String)
+              s.gsub(/\s+(?:ASC|DESC)\b/i, '')
+               .gsub(/\s+NULLS\s+(?:FIRST|LAST)\b/i, '')
+            end
+
+            order_columns = order_columns.reject(&:blank?).map.with_index { |column, i| "#{column} AS alias_#{i}" }
+
+            "DISTINCT #{columns}, #{order_columns * ', '}"
+          end
         end
       end
 
