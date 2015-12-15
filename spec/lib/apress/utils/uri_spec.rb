@@ -76,4 +76,25 @@ describe Apress::Utils::Uri do
 
   end
 
+  describe '#add_params_to_url' do
+    context 'when calling' do
+      let(:schema) { 'http://' }
+      let(:url) { 'test.com' }
+
+      context 'with url + params' do
+        let(:add_params_to_url) { CoreUriStubModule.add_params_to_url(schema << url << '/?id=123', 'param' => true) }
+        it { expect(add_params_to_url).to eq 'http://test.com/?id=123&param=true' }
+      end
+
+      context 'with url' do
+        let(:add_params_to_url) { CoreUriStubModule.add_params_to_url(schema << url, 'param' => true) }
+        it { expect(add_params_to_url).to eq 'http://test.com?param=true' }
+      end
+
+      context 'with not normalized url' do
+        let(:add_params_to_url) { CoreUriStubModule.add_params_to_url(url, 'param' => true) }
+        it { expect(add_params_to_url).to eq 'http://test.com?param=true' }
+      end
+    end
+  end
 end
