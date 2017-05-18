@@ -32,5 +32,19 @@ module Apress::Utils
 
       Addressable::URI.parse(url).normalize.to_s
     end
+
+    def normalize_url(url)
+      if url.present? && url.is_a?(String) && !url.match(%r{^http(s)?://})
+        'http://' + url
+      else
+        url
+      end
+    end
+
+    def add_params_to_url(url, params = {})
+      url = Addressable::URI.parse(url)
+      url.query_values = (url.query_values || {}).merge!(params) if params.present?
+      normalize_url(url.to_s)
+    end
   end
 end
