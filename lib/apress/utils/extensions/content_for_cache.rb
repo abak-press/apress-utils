@@ -32,12 +32,13 @@ module ActionController
 
       def read_fragment_with_content_to_cache(key, options = nil)
         result = read_fragment_without_content_to_cache(key, options)
-        # actionpack-3.2.22.5/lib/action_controller/caching/fragments.rb:76
-        return result unless result.is_a?(Hash) && result.key?(:layout)
+
+        return result if !result.is_a?(Hash) || !result.key?(:layout)
 
         result = result.dup if result.frozen?
         fragment = result.delete(:layout)
         self.cached_content_for = {}.merge(result)
+
         fragment.respond_to?(:html_safe) ? fragment.html_safe : fragment
       end
 
