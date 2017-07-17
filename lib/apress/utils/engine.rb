@@ -25,7 +25,8 @@ module Apress
       config.before_initialize do
         if Rails::VERSION::MAJOR == 4 && Rails::VERSION::MINOR == 0
           ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend(
-            Apress::Utils::Extensions::ActiveRecord::ConnectionAdapters::Rails40::PostgreSQLAdapter)
+            Apress::Utils::Extensions::ActiveRecord::ConnectionAdapters::Rails40::PostgreSQLAdapter
+          )
 
           ActiveRecord::ConnectionAdapters::PostgreSQLColumn.prepend(
             Extensions::ActiveRecord::ConnectionAdapters::Rails40::PostgreSQLColumn

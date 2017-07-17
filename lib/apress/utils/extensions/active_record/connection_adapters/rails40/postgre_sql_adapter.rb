@@ -19,7 +19,7 @@ module Apress
 
               def enum_types
                 @enum_types ||= begin
-                                  result = execute %q{SELECT DISTINCT oid, typname FROM pg_type where typcategory = 'E'}, 'SCHEMA'
+                                  result = execute "SELECT DISTINCT oid, typname FROM pg_type where typcategory = 'E'", 'SCHEMA'
                                   result.to_a.each_with_object({}) { |row, h| h[row['oid'].to_i] = row['typname'] }
                                 end
               end

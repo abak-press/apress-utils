@@ -3,7 +3,7 @@ ActiveRecord::Schema.define do
     t.string :name
   end
 
-  execute %q{create type people_state as enum ('pending', 'active')}
+  execute "create type people_state as enum ('pending', 'active')"
 
   create_table :people do |t|
     t.string :first_name

@@ -23,7 +23,7 @@ module Apress
                   default_value = super
                   return default_value if default_value
 
-                  if match = /\A'(.*)'::(.*)\z/.match(default) 
+                  if match = /\A'(.*)'::(.*)\z/.match(default)
                     if ::ActiveRecord::Base.connection.enum_types.values.include?(match[2])
                       return match[1]
                     end
