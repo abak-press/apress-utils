@@ -20,4 +20,8 @@ ActiveRecord::Schema.define do
   create_table :test_models do |t|
     t.string :name
   end
+
+  create_table :test_model_with_virtual_attrs do |t|
+    t.string :name
+  end
 end

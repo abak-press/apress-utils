@@ -65,6 +65,7 @@ module Apress
         if Gem::Version.new(ActiveRecord::VERSION::STRING) < Gem::Version.new('4.2.1')
           ActiveSupport.on_load(:active_record) do
             prepend ::Apress::Utils::Extensions::ActiveRecord::AutosaveAssociation
+            prepend ::Apress::Utils::Extensions::ActiveRecord::VirtualAttrs
           end
         end
 
