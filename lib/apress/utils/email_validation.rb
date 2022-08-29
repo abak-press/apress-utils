@@ -4,7 +4,9 @@
 module Apress
   module Utils
     module EmailValidation
-      EMAIL_REGEXP = /\A[a-z0-9\-_]+(?:\.[a-z0-9\-\._]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}\Z/i
+      EMAIL_REGEXP = /\A[a-zа-яё0-9\-_]+(?:\.[a-zа-яё0-9\-\._]+)*@
+        (?:[a-zа-яё0-9](?:[a-zа-яё0-9-]*[a-zа-яё0-9])?\.)+
+        [a-zа-яё0-9](?:[a-zа-яё0-9-]*[a-zа-яё0-9])?\Z/ix.freeze
 
       def regexp
         EMAIL_REGEXP
