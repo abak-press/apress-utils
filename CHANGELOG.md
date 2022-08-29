@@ -1,6 +1,10 @@
+# v2.11.0
+
+* 2022-08-29 [7545055](../../commit/7545055) - __(git3-railsc)__ Release 2.11.0 
+* 2022-08-09 [18a6acf](../../commit/18a6acf) - __(Ilya Zorin)__ feat(email): add cyrillic support for email 
+
 # v2.10.2
 
-* 2022-03-15 [2c244b4](../../commit/2c244b4) - __(Gelani Geliskhanov)__ Release v2.10.2 
 Correct rails version rules for rails 4.2
 You do not need to do anything to connect to the project
 
