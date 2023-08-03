@@ -6,18 +6,10 @@ source 'https://rubygems.org'
 
 gemspec
 
-if RUBY_VERSION < '2.3'
-  gem 'nokogiri', '< 1.10.0', require: false
-  gem 'pry-byebug', '< 3.7.0', require: false
-  gem 'redis', '< 4.1.2', require: false
-end
-
-if RUBY_VERSION < '2.4'
-  gem 'rails', '4.0.13', require: false
-else
-  gem 'rails', '4.2.11.2', require: false
-end
-
 # NameError: uninitialized constant Pry::Command::ExitAll при попытке выполнить require 'pry-byebug'
 gem 'pry', '< 0.13.0', require: false
 gem 'rspec-rails', '~> 3.9.1', require: false
+gem 'nokogiri', '~> 1.8.0', require: false
+gem 'loofah', '~> 2.19.1', require: false
+gem 'pry-byebug', '< 3.7.0', require: false
+gem 'redis', '< 4.1.2', require: false
