@@ -69,7 +69,7 @@ describe Apress::Utils::Uri do
     end
   end
 
-  pending "test 3" do
+  xit "test 3" do
     strings2.each do |data|
       CoreUriStubModule.encode_punycode(data[0]).should be == data[1]
     end
