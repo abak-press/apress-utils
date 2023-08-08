@@ -21,4 +21,13 @@ ActiveRecord::Schema.define do
   create_table :test_models do |t|
     t.string :name
   end
+
+  create_table :relatives do |t|
+    t.string :name
+    t.references :parent_error_model
+    t.references :collection_error_model
+  end
+
+  create_table :parent_error_models
+  create_table :collection_error_models
 end
