@@ -1,6 +1,17 @@
+# v2.12.0
+
+* 2023-09-05 [ac1e683](../../commit/ac1e683) - __(git2-railsc)__ Release 2.12.0 
+* 2023-08-07 [929e85f](../../commit/929e85f) - __(ArtemBorodinEvgenyevich)__ chore: change pending test to xit 
+https://jira.railsc.ru/browse/PC4-29948
+
+* 2023-08-03 [56d3365](../../commit/56d3365) - __(ArtemBorodinEvgenyevich)__ chore: lock gems versions 
+https://jira.railsc.ru/browse/PC4-29948
+
+* 2023-08-01 [c5cb38e](../../commit/c5cb38e) - __(ArtemBorodinEvgenyevich)__ feat: add option to assign error for collection models on validation 
+https://jira.railsc.ru/browse/PC4-29910
+
 # v2.11.0
 
-* 2022-08-29 [7545055](../../commit/7545055) - __(git3-railsc)__ Release 2.11.0 
 * 2022-08-09 [18a6acf](../../commit/18a6acf) - __(Ilya Zorin)__ feat(email): add cyrillic support for email 
 
 # v2.10.2
