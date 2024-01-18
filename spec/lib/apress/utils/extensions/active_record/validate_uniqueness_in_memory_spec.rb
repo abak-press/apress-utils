@@ -14,7 +14,24 @@ describe Apress::Utils::Extensions::ActiveRecord::ValidateUniquenessInMemory do
         relative_2.name = 'relative_2'
 
         model.relatives = [relative_1, relative_2]
-        model.save
+        model.save!
+      end
+
+      it 'is valid and has no errors' do
+        expect(model).to be_valid
+      end
+    end
+
+    context 'when realatives are unique and has empty' do
+      let(:relative_1) { Relative.create }
+      let(:relative_2) { Relative.create }
+
+      before do
+        relative_1.name = ''
+        relative_2.name = 'relative_2'
+
+        model.relatives = [relative_1, relative_2]
+        model.save!
       end
 
       it 'is valid and has no errors' do
@@ -83,6 +100,36 @@ describe Apress::Utils::Extensions::ActiveRecord::ValidateUniquenessInMemory do
         expect(model).to_not be_valid
         expect(model.errors.messages[:base].first).to eq expected_base_error
         expect(model.errors.messages[:value].first).to eq expected_value_error
+      end
+    end
+
+    context 'when relatives are empty' do
+      let(:expected_base_error) { 'Change duplicate fields' }
+      let(:expected_value_error) { 'Duplicate field' }
+      let(:expected_relative_value_error) { 'Field can not be empty' }
+
+      let(:relative_1) { Relative.create }
+      let(:relative_2) { Relative.create }
+      let(:relative_3) { Relative.create }
+
+      before do
+        relative_1.name = ''
+        relative_1.position = 1
+        relative_2.name = ''
+        relative_2.position = 1
+        relative_3.name = 'relative_3'
+        relative_2.position = 1
+
+        model.relatives = [relative_1, relative_2, relative_3]
+        model.save
+      end
+
+      it 'is not valid and has errors' do
+        expect(model).to_not be_valid
+        expect(model.errors.messages[:base].first).to eq expected_base_error
+        expect(model.errors.messages[:value].first).to eq expected_value_error
+        expect(relative_1.errors.messages[:value].first).to eq expected_relative_value_error
+        expect(relative_2.errors.messages[:value].first).to eq expected_relative_value_error
       end
     end
   end
