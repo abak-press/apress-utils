@@ -24,6 +24,7 @@ ActiveRecord::Schema.define do
 
   create_table :relatives do |t|
     t.string :name
+    t.integer :position
     t.references :parent_error_model
     t.references :collection_error_model
   end
