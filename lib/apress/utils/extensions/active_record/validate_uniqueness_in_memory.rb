@@ -23,6 +23,7 @@ module Apress::Utils::Extensions::ActiveRecord
         # Returns Object
         def validate_uniqueness_of_in_memory(collection, attrs, message, attribute = :base, options = {})
           duplicates = []
+          empties = []
           hashes = collection.inject({}) do |hash, record|
             # getting a unique key for the record
             key = attrs.map {|a| record.send(a).to_s }.join
@@ -44,8 +45,6 @@ module Apress::Utils::Extensions::ActiveRecord
             empties.each do |record|
               record.errors.add(attribute, options[:empty_attr_message])
             end
-
-            errors.add(:base, options[:additional_message]) if options[:additional_message]
           end
 
           if options[:assign_error_to_collection] && duplicates.present?
@@ -53,7 +52,7 @@ module Apress::Utils::Extensions::ActiveRecord
               duplicate.errors.add(attribute, message)
             end
 
-            errors.add(:base, options[:additional_message]) if options[:additional_message]
+            errors.add(:base, options[:additional_message]) if options[:additional_message] && empties.empty?
           end
 
           if collection.length > hashes.length
