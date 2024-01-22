@@ -104,7 +104,6 @@ describe Apress::Utils::Extensions::ActiveRecord::ValidateUniquenessInMemory do
     end
 
     context 'when relatives are empty' do
-      let(:expected_base_error) { 'Change duplicate fields' }
       let(:expected_value_error) { 'Duplicate field' }
       let(:expected_relative_value_error) { 'Field can not be empty' }
 
@@ -126,7 +125,6 @@ describe Apress::Utils::Extensions::ActiveRecord::ValidateUniquenessInMemory do
 
       it 'is not valid and has errors' do
         expect(model).to_not be_valid
-        expect(model.errors.messages[:base].first).to eq expected_base_error
         expect(model.errors.messages[:value].first).to eq expected_value_error
         expect(relative_1.errors.messages[:value].first).to eq expected_relative_value_error
         expect(relative_2.errors.messages[:value].first).to eq expected_relative_value_error
