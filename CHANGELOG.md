@@ -1,6 +1,14 @@
+# v2.13.0
+
+* 2024-01-31 [356d719](../../commit/356d719) - __(git1-railsc)__ Release 2.13.0 
+* 2024-01-22 [11f8df4](../../commit/11f8df4) - __(ArtemBorodinEvgenyevich)__ feat: do not add error to base if models with empty fields 
+https://jira.railsc.ru/browse/PC4-30143
+
+* 2024-01-19 [d2798ea](../../commit/d2798ea) - __(ArtemBorodinEvgenyevich)__ feat: add validation option for empty attributes 
+https://jira.railsc.ru/browse/PC4-30143
+
 # v2.12.0
 
-* 2023-09-05 [ac1e683](../../commit/ac1e683) - __(git2-railsc)__ Release 2.12.0 
 * 2023-08-07 [929e85f](../../commit/929e85f) - __(ArtemBorodinEvgenyevich)__ chore: change pending test to xit 
 https://jira.railsc.ru/browse/PC4-29948
 
