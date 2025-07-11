@@ -1,6 +1,11 @@
+# v2.13.1
+
+* 2025-07-11 [b00c3b8](../../commit/b00c3b8) - __(Andrew N. Shalaev)__ Release v2.13.1 
+* 2025-07-11 [b035814](../../commit/b035814) - __(Andrew N. Shalaev)__ fix: remove wrong property of form tag 
+https://jira.railsc.ru/browse/BPC-25235
+
 # v2.13.0
 
-* 2024-01-31 [356d719](../../commit/356d719) - __(git1-railsc)__ Release 2.13.0 
 * 2024-01-22 [11f8df4](../../commit/11f8df4) - __(ArtemBorodinEvgenyevich)__ feat: do not add error to base if models with empty fields 
 https://jira.railsc.ru/browse/PC4-30143
 
