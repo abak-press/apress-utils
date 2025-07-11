@@ -6,18 +6,18 @@ RSpec.describe ActionView::Helpers::FormTagHelper, type: :helper do
     context 'without block' do
       let(:expected_html) do
         if ::Apress::Utils.rails40?
-          "<form accept-charset=\"UTF-8\" accept-encoding=\"UTF-8\" action=\"/spec\" method=\"post\""\
+          "<form accept-charset=\"UTF-8\" action=\"/spec\" method=\"post\""\
             " onsubmit=\"formSubmitter.disableButtons(this, null, null);\">"\
             "<div style=\"margin:0;padding:0;display:inline\">"\
             "<input name=\"utf8\" type=\"hidden\" value=\"&#x2713;\" /></div>"
         elsif ::Apress::Utils.rails41?
-          "<form accept-charset=\"UTF-8\" accept-encoding=\"UTF-8\" action=\"/spec\" method=\"post\""\
+          "<form accept-charset=\"UTF-8\" action=\"/spec\" method=\"post\""\
             " onsubmit=\"formSubmitter.disableButtons(this, null, null);\">"\
             "<div style=\"display:none\">"\
             "<input name=\"utf8\" type=\"hidden\" value=\"&#x2713;\" /></div>"
         else
           '<form onsubmit="formSubmitter.disableButtons(this, null, null);" action="/spec"'\
-            ' accept-charset="UTF-8" accept-encoding="UTF-8" method="post">'\
+            ' accept-charset="UTF-8" method="post">'\
             '<input name="utf8" type="hidden" value="&#x2713;" />'
         end
       end
@@ -32,14 +32,14 @@ RSpec.describe ActionView::Helpers::FormTagHelper, type: :helper do
     context 'with block' do
       let(:expected_html) do
         if ::Apress::Utils.rails40?
-          "<form accept-charset=\"UTF-8\" accept-encoding=\"UTF-8\" action=\"/spec\" method=\"post\""\
+          "<form accept-charset=\"UTF-8\" action=\"/spec\" method=\"post\""\
             " onsubmit=\"formSubmitter.disableButtons(this, null, null);\">"\
             "<div style=\"margin:0;padding:0;display:inline\">"\
             "<input name=\"utf8\" type=\"hidden\" value=\"&#x2713;\" /></div>"\
             "<input id=\"my_awesome_tag\" name=\"my_awesome_tag\" type=\"hidden\" value=\"100_500\" />"\
           "</form>"
         elsif ::Apress::Utils.rails41?
-          "<form accept-charset=\"UTF-8\" accept-encoding=\"UTF-8\" action=\"/spec\" method=\"post\""\
+          "<form accept-charset=\"UTF-8\" action=\"/spec\" method=\"post\""\
             " onsubmit=\"formSubmitter.disableButtons(this, null, null);\">"\
             "<div style=\"display:none\">"\
             "<input name=\"utf8\" type=\"hidden\" value=\"&#x2713;\" /></div>"\
@@ -47,7 +47,7 @@ RSpec.describe ActionView::Helpers::FormTagHelper, type: :helper do
           "</form>"
         else
           "<form onsubmit=\"formSubmitter.disableButtons(this, null, null);\" action=\"/spec\""\
-            " accept-charset=\"UTF-8\" accept-encoding=\"UTF-8\" method=\"post\">"\
+            " accept-charset=\"UTF-8\" method=\"post\">"\
             "<input name=\"utf8\" type=\"hidden\" value=\"&#x2713;\" />"\
             "<input type=\"hidden\" name=\"my_awesome_tag\" id=\"my_awesome_tag\" value=\"100_500\" />"\
           "</form>"
