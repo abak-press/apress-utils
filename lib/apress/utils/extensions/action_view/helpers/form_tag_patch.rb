@@ -11,7 +11,6 @@ module ActionView
         end
 
         html_options = html_options_for_form(url_for_options, options, *parameters_for_url)
-        html_options["accept-encoding"] = "UTF-8" # TODO Rails - убрать
 
         if block_given?
           if rails_less_than_42?
