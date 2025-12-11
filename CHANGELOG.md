@@ -1,6 +1,10 @@
+# v2.14.0
+
+* 2025-12-11 [0a733cf](../../commit/0a733cf) - __(Andrew N. Shalaev)__ Release v2.14.0 
+* 2025-12-11 [906b09a](../../commit/906b09a) - __(Andrew N. Shalaev)__ feature: add support for Rails v5.0 
+
 # v2.13.1
 
-* 2025-07-11 [b00c3b8](../../commit/b00c3b8) - __(Andrew N. Shalaev)__ Release v2.13.1 
 * 2025-07-11 [b035814](../../commit/b035814) - __(Andrew N. Shalaev)__ fix: remove wrong property of form tag 
 https://jira.railsc.ru/browse/BPC-25235
 
