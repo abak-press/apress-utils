@@ -4,18 +4,11 @@ require 'spec_helper'
 RSpec.describe ActionView::Helpers::FormHelper, type: :helper do
   describe '#html_options_for_form' do
     let(:expected_html) do
-      if ::Rails::VERSION::MAJOR == 4 && ::Rails::VERSION::MINOR >= 2
-        {
-          'accept-charset' => 'UTF-8',
-          'action' => '/spec',
-          'onsubmit' => 'formSubmitter.disableButtons(this, null, null);',
-        }
-      else
-        {
-          'accept-charset' => 'UTF-8',
-          'action' => '/spec',
-        }
-      end
+      {
+        'accept-charset' => 'UTF-8',
+        'action' => '/spec',
+        'onsubmit' => 'formSubmitter.disableButtons(this, null, null);'
+      }
     end
     let(:result) { helper.html_options_for_form({controller: :application, action: :show}, {}) }
 

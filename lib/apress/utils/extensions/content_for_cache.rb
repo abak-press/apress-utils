@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 module ActionController
-
   class Metal
     attr_internal :cached_content_for
   end
@@ -18,30 +17,68 @@ module ActionController
       end
     end
 
-    module Fragments
-      def write_fragment_with_content_to_cache(key, content, options = nil)
-        return content unless cache_configured?
+    if Rails::VERSION::MAJOR < 5
+      module Fragments
+        def write_fragment(key, content, options = nil)
+          return content unless cache_configured?
 
-        key = fragment_cache_key(key)
-        instrument_fragment_cache :write_fragment, key do
-          cache_store.write(key, content, options)
+          key = fragment_cache_key(key)
+          instrument_fragment_cache :write_fragment, key do
+            cache_store.write(key, content, options)
+          end
+
+          content.is_a?(Hash) ? content[:layout] : content
         end
 
-        content.is_a?(Hash) ? content[:layout] : content
-      end
+        def read_fragment(key, options = nil)
+          return unless cache_configured?
 
-      def read_fragment_with_content_to_cache(key, options = nil)
-        result = read_fragment_without_content_to_cache(key, options)
-        if result.is_a?(Hash) && result.key?(:layout)
-          self.cached_content_for = result.except(:layout)
-          result = result[:layout]
+          key = fragment_cache_key(key)
+          instrument_fragment_cache :read_fragment, key do
+            result = cache_store.read(key, options)
+            if result.is_a?(Hash) && result.key?(:layout)
+              self.cached_content_for = result.except(:layout)
+              result = result[:layout]
+            end
+
+            result.respond_to?(:html_safe) ? result.html_safe : result
+          end
+        end
+      end
+    end
+  end
+end
+
+if Rails::VERSION::MAJOR >= 5
+  module AbstractController
+    module Caching
+      module Fragments
+        def write_fragment(key, content, options = nil)
+          return content unless cache_configured?
+
+          key = fragment_cache_key(key)
+          instrument_fragment_cache :write_fragment, key do
+            cache_store.write(key, content, options)
+          end
+
+          content.is_a?(Hash) ? content[:layout] : content
         end
 
-        result.respond_to?(:html_safe) ? result.html_safe : result
-      end
+        def read_fragment(key, options = nil)
+          return unless cache_configured?
 
-      alias_method_chain :write_fragment, :content_to_cache
-      alias_method_chain :read_fragment, :content_to_cache
+          key = fragment_cache_key(key)
+          instrument_fragment_cache :read_fragment, key do
+            result = cache_store.read(key, options)
+            if result.is_a?(Hash) && result.key?(:layout)
+              self.cached_content_for = result.except(:layout)
+              result = result[:layout]
+            end
+
+            result.respond_to?(:html_safe) ? result.html_safe : result
+          end
+        end
+      end
     end
   end
 end
