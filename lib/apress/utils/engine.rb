@@ -15,12 +15,8 @@ module Apress
 
       require cd + '/extensions/uri/parsers_overrides'
 
-      if RUBY_VERSION < '2.2'
-        URI::Parser.send(:include, ::Apress::Utils::Extensions::Uri::ParsersOverrides)
-      else
-        URI::RFC2396_Parser.send(:include, ::Apress::Utils::Extensions::Uri::ParsersOverrides)
-        URI::RFC3986_Parser.send(:include, ::Apress::Utils::Extensions::Uri::ParsersOverrides)
-      end
+      URI::RFC2396_Parser.send(:include, ::Apress::Utils::Extensions::Uri::ParsersOverrides)
+      URI::RFC3986_Parser.send(:include, ::Apress::Utils::Extensions::Uri::ParsersOverrides)
 
       config.before_initialize do
         require cd + '/extensions/content_for_cache'
@@ -51,18 +47,18 @@ module Apress
 
         require cd + '/extensions/readthis/cache'
 
-        Readthis::Cache.send(:include, ::Apress::Utils::Extensions::Readthis::Cache)
+        Readthis::Cache.include ::Apress::Utils::Extensions::Readthis::Cache
 
         if Rails::VERSION::MAJOR == 4 && Rails::VERSION::MINOR < 2
           require 'apress/utils/extensions/action_dispatch/flash'
         end
 
         if Rails::VERSION::MAJOR == 4
-          ActiveRecord::Relation.prepend(Extensions::ActiveRecord::FinderMethods)
+          ActiveRecord::Relation.prepend(::Apress::Utils::Extensions::ActiveRecord::FinderMethods)
+        end
 
-          if Rails::VERSION::MINOR < 1
-            require 'apress/utils/extensions/active_support/time_with_zone'
-          end
+        if Rails::VERSION::MAJOR == 4 && Rails::VERSION::MINOR < 1
+          require 'apress/utils/extensions/active_support/time_with_zone'
         end
       end
     end

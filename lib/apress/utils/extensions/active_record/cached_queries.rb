@@ -77,19 +77,37 @@ module Apress::Utils::Extensions::ActiveRecord::CachedQueries
     end
 
     module ClassMethods
-      def find_by_sql(sql, binds = [])
-        return super if @without_cache
+      if Rails::VERSION::MAJOR < 5
+        def find_by_sql(sql, binds = [])
+          return super if @without_cache
 
-        binds_key = binds.map { |x| "#{x[0].name}:#{x[1].to_s}" } * ','
-        sql_key = query_key(sql, binds.dup)
+          binds_key = binds.map { |x| "#{x[0].name}:#{x[1]}" } * ','
+          sql_key = query_key(sql, binds.dup)
 
-        return super if sql_key.include? ' JOIN '
+          return super if sql_key.include? ' JOIN '
 
-        cache_key = Digest::SHA1.hexdigest("#{sql_key}#{binds_key}")
-        cache_key = "#{self.to_s.demodulize}:#{cache_key}"
+          cache_key = Digest::SHA1.hexdigest("#{sql_key}#{binds_key}")
+          cache_key = "#{to_s.demodulize}:#{cache_key}"
 
-        cached_queries_store.fetch(cache_key) do
-          super
+          cached_queries_store.fetch(cache_key) do
+            super
+          end
+        end
+      else
+        def find_by_sql(sql, binds = [], preparable: nil, &block)
+          return super if @without_cache
+
+          binds_key = binds.map { |attr| "#{attr.name}:#{attr.value_before_type_cast}" } * ','
+          sql_key = query_key(sql, binds.dup)
+
+          return super if sql_key.include? ' JOIN '
+
+          cache_key = Digest::SHA1.hexdigest("#{sql_key}#{binds_key}")
+          cache_key = "#{to_s.demodulize}:#{cache_key}"
+
+          cached_queries_store.fetch(cache_key) do
+            super
+          end
         end
       end
 
